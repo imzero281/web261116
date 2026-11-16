@@ -68,6 +68,8 @@ function renderCards(list) {
         <p class="year">${m.year}</p>
       </div>`;
         board.appendChild(card);
+        card.dataset.id = m.id;
+        card.onclick = function () { alert(m.overview); };
     }
     document.getElementById("count").textContent = list.length + "편";
 }
@@ -90,3 +92,4 @@ function applySort() {
 
 //renderCards(movies);
 applySort();
+
