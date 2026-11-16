@@ -109,6 +109,10 @@ footer {
     animation-delay: 0.4s;
 }
 
+.card:nth-child(6) {
+    animation-delay: 0.5s;
+}
+
 .card:hover {
     transform: translateY(-8px);
     box-shadow: 0 12px 32px rgba(255, 193, 7, 0.6);
