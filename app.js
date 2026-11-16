@@ -31,12 +31,12 @@ const filterByRating = (list, min) => {
 console.log("8점 이상:", filterByRating(movies, 8).length + "편");
 
 
-//영화 배열 ⇒ 평점 높은 순으로 정렬한 새 배열(원본은 그대로)
+/*영화 배열 ⇒ 평점 높은 순으로 정렬한 새 배열(원본은 그대로)
 const sortByRating = (list) => {
     return [...list].sort((a, b) => b.rating - a.rating);
 }
 const sorted = sortByRating(movies);
-console.log("정렬 1위:", sorted[0].title, "/ 원본 1번:", movies[0].title);
+console.log("정렬 1위:", sorted[0].title, "/ 원본 1번:", movies[0].title);*/ //실습서 5번에서 지워도 된다고 함
 
 
 //날짜 문자열 ⇒ 올해까지 몇 년(숫자)
@@ -52,7 +52,41 @@ const posterUrl = (path, size) => {
 }
 console.log(posterUrl(movies[0].poster, "w342"));
 
+// renderCards : 영화 배열 ⇒ 보드에 카드 생성(반환값 없음)
+function renderCards(list) {
+    const board = document.querySelector(".board");
+    board.innerHTML = "";
+    for (const m of list) {
+        const card = document.createElement("article");
+        card.className = "card";
+        if (m.rating >= 8) { card.classList.add("hot"); }
+        card.innerHTML = `
+      <img class="poster" src="${posterUrl(m.poster, "w342")}" alt="${m.title} 포스터">
+      <span class="badge">${m.rating}</span>
+      <div class="info">
+        <h2>${m.title}</h2>
+        <p class="year">${m.year}</p>
+      </div>`;
+        board.appendChild(card);
+    }
+    document.getElementById("count").textContent = list.length + "편";
+}
 
-document.title = "내 영화" + movies.length + "편";
-console.table(sortByRating(movies));
-document.getElementById("out").textContent = "평균 " + average(movies).toFixed(1) + "점, 최고 " + best(movies).title;
+// sortBy : 영화 배열, 키 이름, 내림차순 여부 ⇒ 정렬한 새 배열(원본은 그대로)
+function sortBy(list, key, desc) {
+    const copy = [...list];
+    copy.sort((a, b) => {
+        if (typeof a[key] === "string") return a[key].localeCompare(b[key]);
+        return a[key] - b[key];
+    });
+    if (desc) copy.reverse();
+    return copy;
+}
+// applySort : 선택 상자 값으로 정렬해서 다시 그리기(반환값 없음)
+function applySort() {
+    const key = document.getElementById("sort").value;
+    renderCards(sortBy(movies, key, key !== "title"));
+}
+
+//renderCards(movies);
+applySort();

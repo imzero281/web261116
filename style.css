@@ -198,13 +198,13 @@ footer {
 }
 
 
-@media (prefers-color-scheme: light){
-    :root{
-    --bg: #f3f5f9;
-    --surface: #ffffff;
-    --text: #afcfff;
-    --accent: #2878d0;
-    --warn: #e5484d;
+@media (prefers-color-scheme: light) {
+    :root {
+        --bg: #f3f5f9;
+        --surface: #ffffff;
+        --text: #afcfff;
+        --accent: #2878d0;
+        --warn: #e5484d;
     }
 }
 
@@ -241,6 +241,18 @@ footer {
 
 @media (min-width: 1280px) {
     .board {
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(6, 1fr);
     }
+}
+
+.card.hot .badge {
+    background: crimson;
+    color: #fff;
+}
+
+.toolbar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #fff;
 }
