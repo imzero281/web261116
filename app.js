@@ -84,10 +84,12 @@ function sortBy(list, key, desc) {
     if (desc) copy.reverse();
     return copy;
 }
+
+
 // applySort : 선택 상자 값으로 정렬해서 다시 그리기(반환값 없음)
 function applySort() {
     const key = document.getElementById("sort").value;
-    renderCards(sortBy(movies, key, key !== "title"));
+    renderCards(sortBy(movies, key.replace("_r",""), key.includes("_r")));
 }
 
 //renderCards(movies);
